@@ -17,8 +17,6 @@ def registration_view(request):
             data['response'] = 'Sucessfully registred a new user'
             data['email'] = account.email
             data['username'] = account.username
-            token = Token.objects.get(user=account).key
-            data['token'] = token
             status_code = status.HTTP_201_CREATED
 
         else:

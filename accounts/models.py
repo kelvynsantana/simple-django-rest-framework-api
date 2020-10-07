@@ -7,6 +7,8 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 from rest_framework.authtoken.models import Token
 
+import uuid
+
 
 class MyAccountManager(BaseUserManager):
     def create_user(self, email, username, password=None):
@@ -36,6 +38,7 @@ class MyAccountManager(BaseUserManager):
 
 
 class Account(AbstractBaseUser):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False, )
     email = models.EmailField(verbose_name='email', max_length=60, unique=True)
     username = models.CharField(max_length=30, unique=True)
     date_joined = models.DateTimeField(
